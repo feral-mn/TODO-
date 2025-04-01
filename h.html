@@ -3,61 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo</title>
+    <title>Document</title>
 </head>
-    <body>
-        <h1>To Do</h1>
-        <input id="input" type="text">
-        <button onclick="addTodo()">ADD</button>
-        <div id="todo">
-
-        </div>
-        
-
-    </body>
+<body>
+    <input type="text">
+    <button onclick="addTodo()">Add</button>
+    <div id="todo_list"></div>
+</body>
+<script>
+    let todos=[]
     
-    <script>
-        let ctr = 1;
+    function render(){
+        document.querySelector("#todo_list").innerHTML=""
+        for(i=0;i<todos.length;i++)
+        {
+    
+            let div = document.createElement("div")
+
+            let heading = document.createElement("h2")
+            heading.textContent = `${todos[i]}`
+
+            let del = document.createElement("button")
+            del.setAttribute("onclick", "delTodo("+i+")")
+            del.textContent = "Delete"
+
+            div.appendChild(heading)
+            div.appendChild(del)
+            document.querySelector("#todo_list").appendChild(div)
+        }  
         
-        function addTodo(){
-            //Extracting input value from todo
-            let input_text = document.querySelector("#input").value.trim()
+    }
+    
+    function addTodo(){
+        todos.push(document.querySelector("input").value)
+        console.log(todos)
+        render()
+    }
+    function delTodo(index){
+        todos.splice(index, 1)
+        render()
+    }
+    
 
-            if(input_text===""){
-                alert("Please enter a todo")
-                return
-            }
-
-            //Creatingn new div
-            let todo_div = document.createElement("div")
-            todo_div.setAttribute("id","todo-"+ctr)
-
-            //Creating new todo heading
-            let todo_heading = document.createElement("h3")
-            todo_heading.textContent = `${ctr}. ${input_text}.`
-
-            //Creating del button
-            let del_but = document.createElement("button")
-            del_but.textContent = "Delete"
-            del_but.setAttribute("onclick", "delTodo("+ctr+")")
-
-            //Combining delete button and todo text in todo div
-            todo_div.appendChild(todo_heading)
-            todo_div.appendChild(del_but)
-
-            //Appending it to the main parent div
-            document.querySelector("#todo").appendChild(todo_div)
-
-            //Incrementing ctr
-            ctr++
-
-            //Clearing the input field
-            document.querySelector("#input").value = ""
-        }
-        function delTodo(index){
-            console.log("del called")
-            let element = document.querySelector("#todo-"+index)
-            document.querySelector("#todo").removeChild(element)
-        }
-    </script>
+</script>
 </html>
