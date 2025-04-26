@@ -1,8 +1,10 @@
 import express from 'express'
 import jwt from 'jsonwebtoken'
+import cors from 'cors'
 
 const app = express()
 app.use(express.json());// for parsing application/json
+app.use(cors()) // for enabling CORS
 
 let USERS = []
 let JWT_SIGN = "yoyoyoyo"
@@ -67,7 +69,7 @@ app.get('/todos', auth,function(req,res){
     if(!found_todo){
         return res.status(200).json({message: 'Not Authorised'})
     }else{
-        res.status(200).json({todo: found_todo})
+        res.status(200).json({todo: found_todo.todo})
     }
     console.log(USERS)
 })
