@@ -20,8 +20,6 @@ const userSchema = new mongoose.Schema({
     password: {
         type: String,
         required: [true, 'Please provide a password'],
-        minlength: [8, 'Password must be at least 8 characters'],
-        maxlength: [20, 'Name cannot be more than 20 characters'],
         select: false // Never show password in queries
     },
 }, {timestamps: true}); // Adds createdAt and updatedAt automatically

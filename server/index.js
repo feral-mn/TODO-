@@ -6,7 +6,7 @@ import dotenv from 'dotenv'
 import connectDB from './mongoose.js'
 import api_routes from './routes/api_routes.js'
 // import todo_routes from './routes/todo_routes.js'
-// import user_routes from './routes/user_routes.js'
+import user_routes from './routes/user_routes.js'
 
 
 dotenv.config() // Load environment variables from .env file
@@ -18,7 +18,7 @@ app.use(cors()) // for enabling CORS
 
 // Define routes
 app.use('/', api_routes); // API route
-// app.use('/user', user_routes); // User authentication routes
+app.use('/user', user_routes); // User authentication routes
 // app.use('/todo', todo_routes); // Todo management routes
 
 
